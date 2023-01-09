@@ -34,7 +34,7 @@ Future<void> startLoader(BuildContext context) async {
       return Dialog(
         child: Container(
           color: Colors.white,
-          height: px_60,
+          height: px_100,
           width: double.infinity,
           alignment: Alignment.center,
           padding: const EdgeInsets.all(spacing_xxl_2),

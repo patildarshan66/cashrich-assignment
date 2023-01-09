@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../utils/colors.dart';
 import '../utils/custom_dimensions.dart';
 import '../utils/custom_text_styles.dart';
@@ -52,7 +51,7 @@ class _ChartScreenState extends State<ChartScreen> {
                 const Icon(Icons.list, color: yellowColor, size: px_30),
                 const SizedBox(width: px_10),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).pop();
                   },
                   child: Text(
@@ -69,9 +68,6 @@ class _ChartScreenState extends State<ChartScreen> {
           ],
         ),
         const SizedBox(height: spacing_xxl_4),
-        SfSparkBarChart(
-          data: [],
-        )
       ],
     );
   }

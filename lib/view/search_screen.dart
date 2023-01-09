@@ -15,9 +15,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController  _editingController = TextEditingController();
+  final TextEditingController _editingController = TextEditingController();
 
   @override
   void dispose() {
@@ -63,9 +62,11 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             child: TextFormField(
               controller: _editingController,
-              validator: (str){
-                if(str == null && (str ?? '').isEmpty){
+              validator: (str) {
+                if ((str ?? '').isEmpty) {
                   return 'Please enter valid symbol';
+                }else if ((str ?? '').contains(' ')) {
+                  return 'Please use comma instead of space';
                 }
                 return null;
               },
@@ -87,11 +88,14 @@ class _SearchScreenState extends State<SearchScreen> {
               minimumSize: const Size(double.infinity, px_50),
             ),
             onPressed: () {
-              if(! (_formKey.currentState?.validate() ??  false)){
+              if (!(_formKey.currentState?.validate() ?? false)) {
                 return;
               }
-              Provider.of<CryptocurrencyViewModel>(context, listen: false).getCryptocurrencyList(_editingController.text,context,onApiResponse: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const CryptocurrencyScreen()));
+              Provider.of<CryptocurrencyViewModel>(context, listen: false)
+                  .getCryptocurrencyList(_editingController.text, context,
+                      onApiResponse: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const CryptocurrencyScreen()));
               });
             },
             label: const Icon(
