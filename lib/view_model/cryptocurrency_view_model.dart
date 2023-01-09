@@ -22,22 +22,30 @@ class CryptocurrencyViewModel extends ChangeNotifier {
     return _apiResponse;
   }
 
-  Future<void> getCryptocurrencyList() async {
+  Future<void> getCryptocurrencyList(String symbols, BuildContext context,{VoidCallback?  onApiResponse}) async {
     await isConnected().then((value) async {
+      startLoader(context);
       _apiResponse = ApiResponse.loading('Data Loading');
       notifyListeners();
       try {
-        _cryptocurrencyList = await _cryptoCurrencyRepository.fetchCryptoList('${cryptocurrencyQuotesUrl}BTC,ETHLTC,BCH,BAT');
+        _cryptocurrencyList = await _cryptoCurrencyRepository.fetchCryptoList('$cryptocurrencyQuotesUrl$symbols');
         _apiResponse = ApiResponse.completed('Data Received');
+        if(onApiResponse!=null){
+           closeLoader();
+          onApiResponse();
+        }
         notifyListeners();
       } catch (e) {
         _apiResponse = ApiResponse.error(e.toString());
         customPrinter(e.toString());
-        showSnackBar(e.toString(), title: 'Error');
+        showSnackBar(e.toString());
+        closeLoader();
         notifyListeners();
       }
+
     }).onError((error, stackTrace) {
       _apiResponse = ApiResponse.notInternet('No internet connection!');
+      closeLoader();
       notifyListeners();
     });
   }

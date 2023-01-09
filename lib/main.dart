@@ -1,4 +1,5 @@
 import 'package:cashrich_assignment/view/cryptocurrency_screen.dart';
+import 'package:cashrich_assignment/view/search_screen.dart';
 import 'package:cashrich_assignment/view_model/cryptocurrency_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const CryptocurrencyScreen(),
+        home: const SearchScreen(),
       ),
     );
   }

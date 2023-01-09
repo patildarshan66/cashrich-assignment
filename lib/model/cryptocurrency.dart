@@ -29,7 +29,7 @@ class Cryptocurrency {
   final String? slug;
   final int? numMarketPairs;
   final DateTime? dateAdded;
-  final List<String?>? tags;
+  final List<String> tags;
   final int? maxSupply;
   final dynamic circulatingSupply;
   final dynamic totalSupply;
@@ -52,7 +52,7 @@ class Cryptocurrency {
     dateAdded: DateTime.parse(json["date_added"]),
     tags: json["tags"] == null
         ? []
-        : List<String?>.from(json["tags"]!.map((x) => x)),
+        : List<String>.from(json["tags"].map((x) => x)),
     maxSupply: json["max_supply"],
     circulatingSupply: json["circulating_supply"],
     totalSupply: json["total_supply"],
@@ -74,7 +74,7 @@ class Cryptocurrency {
     "slug": slug,
     "num_market_pairs": numMarketPairs,
     "date_added": dateAdded?.toIso8601String(),
-    "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
+    "tags": tags == null ? [] : List<dynamic>.from(tags.map((x) => x)),
     "max_supply": maxSupply,
     "circulating_supply": circulatingSupply,
     "total_supply": totalSupply,

@@ -9,6 +9,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../utils/custom_dimensions.dart';
 import '../view_model/cryptocurrency_view_model.dart';
+import 'chart_screen.dart';
 
 class CryptocurrencyScreen extends StatefulWidget {
   const CryptocurrencyScreen({Key? key}) : super(key: key);
@@ -18,13 +19,6 @@ class CryptocurrencyScreen extends StatefulWidget {
 }
 
 class _CryptocurrencyScreenState extends State<CryptocurrencyScreen> {
-  @override
-  void initState() {
-    Provider.of<CryptocurrencyViewModel>(context, listen: false)
-        .getCryptocurrencyList();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final provider =
@@ -67,9 +61,16 @@ class _CryptocurrencyScreenState extends State<CryptocurrencyScreen> {
                             const Icon(Icons.pie_chart,
                                 color: yellowColor, size: px_30),
                             const SizedBox(width: px_10),
-                            Text(
-                              'Show Chart',
-                              style: subTitle1_16ptRegular(color: yellowColor),
+                            InkWell(
+                              onTap: (){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (ctx)=> const ChartScreen())
+                                );
+                              },
+                              child: Text(
+                                'Show Chart',
+                                style: subTitle1_16ptRegular(color: yellowColor),
+                              ),
                             )
                           ],
                         ),
