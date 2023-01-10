@@ -13,6 +13,16 @@ class CryptocurrencyViewModel extends ChangeNotifier {
 
   List<Cryptocurrency> _cryptocurrencyList = [];
 
+  List<double> _prices = [];
+  List<String> _names = [];
+
+  List<double> get prices {
+    return _prices;
+  }
+
+  List<String> get names {
+    return _names;
+  }
 
   List<Cryptocurrency> get cryptocurrencyList {
     return _cryptocurrencyList;
@@ -48,5 +58,15 @@ class CryptocurrencyViewModel extends ChangeNotifier {
       closeLoader();
       notifyListeners();
     });
+  }
+
+  void loadChartData(){
+    _prices.clear();
+    _names.clear();
+    for (var element in _cryptocurrencyList) {
+      _prices.add(element.quote?.usd?.price ?? 0);
+      _names.add(element.symbol);
+    }
+    notifyListeners();
   }
 }
